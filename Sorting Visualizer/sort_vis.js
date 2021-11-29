@@ -4,7 +4,8 @@ var delay = 50;
 var grid = document.getElementById("container")
 
 var arNum = []
-
+function generate(){
+    grid.innerHTML="";
 for (var i = 0; i < nums; i++) {
     var val = Math.trunc(Math.random() * 100);
     arNum.push(val)
@@ -16,7 +17,7 @@ for (var i = 0; i < nums; i++) {
 
     grid.append(div)
 }
-
+}
 // The delay/sleep function
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -80,6 +81,14 @@ function update() {
         numbs[i].style.height = arNum[i] + "%";
     }
 }
-
-bubbleSort();
+function hideNseek(){
+var status=document.getElementById('num').style;
+if(status.visibility=="hidden")
+status.visibility="visible";
+else {status.visibility="hidden";
+    status=document.getElementById('range');   
+    nums=status.value;
+}
+}
+// bubbleSort();
 // selectionSort();
