@@ -1,0 +1,21 @@
+body{
+    background-color: lightgrey;
+    height:90vh
+}
+
+#container{
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    border-collapse: collapse;
+}
+
+.nums{
+    background-color: green; 
+    width:20px;
+    border:2px solid black;
+}
+
+.cur_num{
+    background-color: rgb(250, 250, 144);
+}
