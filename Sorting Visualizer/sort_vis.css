@@ -1,6 +1,37 @@
 body{
+    margin: 0px;
     background-color: lightgrey;
-    height:90vh
+    height:90vh;
+
+    font-family: "Courier New";
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(104, 104, 104);
+    
+    border-bottom: 2px solid black;    
+    margin-bottom: 20px;
+}
+
+.left-nav, .right-nav{
+    display:flex;
+}
+
+.menus{
+    text-align: center;
+    margin:-1px 30px;
+
+    padding: 10px 0;
+
+    width:120px;
+    border:1px solid black;
+}
+
+.menus:hover{
+    background-color: rgb(131, 131, 131);
+    transform: scale(0.98);
 }
 
 #container{
@@ -9,12 +40,9 @@ body{
     justify-content: center;
 }
 
-.first_num{
-
-}
 .nums{
     background-color: green; 
-    width:20px;
+    /* width:30px; */
     
     border:2px solid black;
     border-collapse: collapse;
