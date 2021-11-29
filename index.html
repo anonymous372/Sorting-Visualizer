@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sorting Visualizer</title>
+        <link rel="stylesheet" href="sort_vis.css">
+    </head>
+    <body>
+        <!-- <nav>
+            <div class="left-nav">
+                <div class="menus">Algorithm</div>
+            </div>
+
+            <div class="menus" </div>
+            
+            <div class="right-nav">
+                <div class="menus" onclick="hideNseek()">Numbers
+                <div id="num"><input type="range" id="range" min="0" max="100"></div>
+                </div>
+                <div class="menus">Delay</div>
+            </div>
+        </nav> -->
+        <div id="nav">
+            <div id="start" onclick="main()">Start</div>
+        </div>
+        <div id="container">
+        </div>        
+        <div id="box">
+        <h2>Welcome</h2>
+        <select>
+            <option>Bubble Sort</option>
+            <option>Insertion Sort</option>
+            <option>Selection Sort</option>
+        </select>
+        <br>
+        <div id="range-cont">
+            <p id="num">50</p>
+            <input type="range" id="range" min="0" max="100" onclick="hideNseek()">
+        </div>
+        </div>
+    </body>
+    <script src="sort_vis.js"></script>
+</html>
