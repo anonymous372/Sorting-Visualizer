@@ -1,12 +1,18 @@
-var nums = 50;
-var delay = 50;
+var nums = 15;
+var delay = 100;
 
 var grid = document.getElementById("container")
 
 var arNum = []
 arNum = Array(nums).fill(0); 
 
+var sortingDone = true; 
+
+// ******************* Functions *********************** 
+
 function initialize(){
+    grid.innerHTML= "";
+
     set_array();
     create_elements()
 }
@@ -56,6 +62,7 @@ async function bubbleSort() {
             show_cur(i,j);
         }
     }
+    sortingDone=true;
 }
 
 async function selectionSort() {
@@ -72,6 +79,7 @@ async function selectionSort() {
         swap(i,curMin);
         update();
     }
+    sortingDone=true;
 }
 
 async function insertionSort(){
@@ -97,7 +105,8 @@ async function insertionSort(){
             await sleep(delay);
             show_cur(j,j+1);   
         }
-    } 
+    }
+    sortingDone=true;
 }
 
 async function mergeSort(){
@@ -121,6 +130,8 @@ function update() {
     }
 }
 function hideNseek(){
+    if(!sortingDone) return;
+
     var status=document.getElementById('num').style;
     if(status.visibility=="hidden")
         status.visibility="visible";
@@ -132,10 +143,11 @@ function hideNseek(){
 }
 
 async function main(){
-    
+    if(!sortingDone) return; 
+
+    sortingDone=false;
     initialize();
     insertionSort();
-
 }
 
 main();

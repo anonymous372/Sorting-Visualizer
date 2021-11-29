@@ -12,6 +12,9 @@ nav {
   background-color: rgb(104, 104, 104);
 
   border-bottom: 2px solid black;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  
   margin-bottom: 20px;
 }
 
@@ -21,13 +24,15 @@ nav {
 }
 
 .menus {
+  cursor: pointer;
+  
   text-align: center;
+  font-size: 22px;
   margin: -1px 30px;
 
   padding: 10px 0;
 
   width: 120px;
-  border: 1px solid black;
 }
 
 .menus:hover {
