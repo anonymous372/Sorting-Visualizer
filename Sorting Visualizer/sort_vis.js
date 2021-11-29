@@ -4,20 +4,36 @@ var delay = 50;
 var grid = document.getElementById("container")
 
 var arNum = []
-function generate(){
-    grid.innerHTML="";
-for (var i = 0; i < nums; i++) {
-    var val = Math.trunc(Math.random() * 100);
-    arNum.push(val)
+arNum = Array(nums).fill(0); 
 
-    div = document.createElement("div")
-    div.classList.add("nums")
-    div.style.height = val + "%"
-    div.style.width = 60/nums + "%"
+function initialize(){
+    set_array();
+    create_elements()
+}
 
-    grid.append(div)
+function reset(){
+    set_array();
+    update();
 }
+
+function set_array(){
+    for (var i = 0; i < nums; i++) {
+        var val = Math.trunc(Math.random() * 100);
+        arNum[i] = val;
+    }
 }
+
+function create_elements(){
+    for (var i = 0; i < nums; i++) {
+        div = document.createElement("div")
+        div.classList.add("nums")
+        div.style.height = arNum[i] + "%"
+        div.style.width = 60/nums + "%"
+    
+        grid.append(div)
+    }   
+}
+
 // The delay/sleep function
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -59,6 +75,29 @@ async function selectionSort() {
 }
 
 async function insertionSort(){
+    for(var i=1; i<nums; i++){
+        
+        var j = i-1;
+        var temp = arNum[i];
+
+        if(temp < arNum[j]){
+            while(j>=0 && temp < arNum[j]){
+                show_cur(j,j+1);
+                swap(j,j+1);
+
+                update();
+                await sleep(delay);
+                show_cur(j,j+1);                
+                
+                j--;
+            }
+        }
+        else{
+            show_cur(j,j+1);
+            await sleep(delay);
+            show_cur(j,j+1);   
+        }
+    } 
 }
 
 async function mergeSort(){
@@ -82,13 +121,21 @@ function update() {
     }
 }
 function hideNseek(){
-var status=document.getElementById('num').style;
-if(status.visibility=="hidden")
-status.visibility="visible";
-else {status.visibility="hidden";
-    status=document.getElementById('range');   
-    nums=status.value;
+    var status=document.getElementById('num').style;
+    if(status.visibility=="hidden")
+        status.visibility="visible";
+    else {
+        status.visibility="hidden";
+        status=document.getElementById('range');   
+        nums=status.value;
+    }
 }
+
+async function main(){
+    
+    initialize();
+    insertionSort();
+
 }
-// bubbleSort();
-// selectionSort();
+
+main();
