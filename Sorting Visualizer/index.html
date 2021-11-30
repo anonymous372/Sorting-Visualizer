@@ -13,7 +13,6 @@
         <!-- Grid -->
         <div id="container">
         </div>
-
         <!-- Setup Box -->
         <div id="box">
             <h2>Welcome</h2>
@@ -24,8 +23,14 @@
             </select>
             <br>
             <div id="range-cont">
-                <p id="rangeText">50</p>
-                <input type="range" id="rangeBar" min="0" max="100" onclick="hideNseek()">
+                <p id="rangeText">15</p>
+                <input type="range" id="rangeBar" min="10" max="100" onclick="hideNseek()">
+            </div>
+            <div id="speedBar">
+                <div class="speed" onclick="press(0)"> Slow</div>
+                <div class="speed" onclick="press(1)"> Medium</div>
+                <div class="speed" onclick="press(2)"> Fast</div>
+                <div class="speed" onclick="press(3)"> Godspeed</div>
             </div>
             <div id="ok">OK</div>
         </div>

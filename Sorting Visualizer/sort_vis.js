@@ -1,5 +1,5 @@
-var nums = 15;
-var delay = 100;
+var nums = 50;
+var delay = 15;
 
 var grid = document.getElementById("container")
 
@@ -115,7 +115,47 @@ async function insertionSort(){
     sortingDone=true;
 }
 
-async function mergeSort(){
+function mergeSort(){
+    merge_sort(0,nums-1);
+    async function merge_sort(start, end){
+        if(start === end) return;
+        var middle = Math.floor((start+end)/2);
+        
+        await merge_sort(start,middle);
+        await merge_sort(middle+1,end);
+        
+        await merge_arrays(start,middle,end);
+    }
+    async function merge_arrays(start,middle,end){
+        for( var i=0;i<=middle;i++){
+            var j = middle+1;
+            if(arNum[i]>arNum[j]){
+                show_cur(i,j);
+                
+                swap(i,j);
+
+                update();
+                await sleep(delay);
+                show_cur(i,j);
+
+                for(var k=j+1;k<=end;k++){
+                    if(arNum[j]>arNum[k]){
+                        show_cur(k,j);
+                        
+                        swap(j,k);
+
+                        update();
+                        await sleep(delay);
+                        show_cur(k,j);
+                        
+                        j++;
+                    }
+                    else
+                        break;
+                }
+            }
+        }
+    }
 }
 
 async function quickSort(){
@@ -139,13 +179,29 @@ function hideNseek(){
     nums = rangeBar.value;
     rangeText.innerText = nums;
 }
+// delay button
+var speedBtns = document.querySelectorAll('.speed');
+var speeds=[200,50,5];
+function press(val){
+    delay = speeds[val];
+    for(var i=0;i<3;i++)
+        if(val==i)
+            speedBtns[i].classList.add("selected-speed");
+        else
+            speedBtns[i].classList.remove("selected-speed");
 
-async function main(){
+}
+//
+function main(){
     if(!sortingDone) return; 
 
-    sortingDone=false;
+    sortingDone = false;
     initialize();
-    insertionSort();
+    // selectionSort();
+    // bubbleSort();
+    // insertionSort();
+    mergeSort();
+    sortingDone = true;
 }
 function startup(){
 
