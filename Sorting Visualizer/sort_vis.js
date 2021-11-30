@@ -7,7 +7,12 @@ var arNum = []
 arNum = Array(nums).fill(0); 
 
 var sortingDone = true; 
-//
+
+var rangeBar = document.getElementById("rangeBar");
+var rangeText = document.getElementById('rangeText');
+
+rangeBar.value = nums;
+rangeText.innerText = nums;
 
 // ******************* Functions *********************** 
 
@@ -131,8 +136,8 @@ function update() {
     }
 }
 function hideNseek(){
-    nums = document.getElementById("range").value;
-    document.getElementById('num').innerText = nums;
+    nums = rangeBar.value;
+    rangeText.innerText = nums;
 }
 
 async function main(){
