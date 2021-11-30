@@ -7,6 +7,7 @@ var arNum = []
 arNum = Array(nums).fill(0); 
 
 var sortingDone = true; 
+//
 
 // ******************* Functions *********************** 
 
@@ -130,16 +131,8 @@ function update() {
     }
 }
 function hideNseek(){
-    if(!sortingDone) return;
-
-    var status=document.getElementById('num').style;
-    if(status.visibility=="hidden")
-        status.visibility="visible";
-    else {
-        status.visibility="hidden";
-        status=document.getElementById('range');   
-        nums=status.value;
-    }
+    nums = document.getElementById("range").value;
+    document.getElementById('num').innerText = nums;
 }
 
 async function main(){
@@ -149,5 +142,7 @@ async function main(){
     initialize();
     insertionSort();
 }
+function startup(){
 
-main();
+}
+// main();
