@@ -231,5 +231,6 @@ function showbox() {
 
 function startup() {
     setupBox.style.visibility = "hidden";
+    generate();
 }
 // main();
