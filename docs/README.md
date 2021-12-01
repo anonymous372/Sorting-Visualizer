@@ -10,4 +10,4 @@ We have,
 * Quick Sort
 
 That's it play with it:<br>
-https://anonymous372.github.io/Sorting-Visualizer/
+[Sorting Visualizer](https://anonymous372.github.io/Sorting-Visualizer/)
