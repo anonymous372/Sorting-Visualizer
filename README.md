@@ -1,3 +1,11 @@
-# Hello Myself, How are you feeling today :rocket:
-Lets Transfer some files
-So let's get down to business
+## See the sorting happen right before your eyes :eyes:
+Visualizing some of the common sorting algorithms
+
+We have,
+* Bubble Sort
+* Selction Sort
+* Insertion Sort
+* Merge Sort
+* Quick Sort
+
+## Snap in Action
