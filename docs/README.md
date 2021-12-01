@@ -1,3 +1,4 @@
+
 ## See the sorting happen right before your eyes :eyes:
 Visualizing some of the common sorting algorithms
 
@@ -8,4 +9,5 @@ We have,
 * Merge Sort
 * Quick Sort
 
-## Snap in Action
+Play with it:<br>
+https://anonymous372.github.io/Sorting-Visualizer/
