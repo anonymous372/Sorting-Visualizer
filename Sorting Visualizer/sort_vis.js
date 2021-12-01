@@ -1,49 +1,51 @@
-var nums = 50;
-var delay = 15;
+var nums = 15;
+var delay = 50;
 
 var grid = document.getElementById("container")
 
 var arNum = []
-arNum = Array(nums).fill(0); 
+arNum = Array(nums).fill(-1);
 
-var sortingDone = true; 
+var sortingDone = true;
 
 var rangeBar = document.getElementById("rangeBar");
 var rangeText = document.getElementById('rangeText');
+var setupBox = document.getElementById("box");
+var speedBtns = document.querySelectorAll('.speed');
+var speeds = [200, 50, 10, 2];
 
+// setup tghe range bar with starting nums value
 rangeBar.value = nums;
 rangeText.innerText = nums;
 
+// select the medium speed when starts
+speedBtns[1].classList.add("selected-speed")
+
 // ******************* Functions *********************** 
 
-function initialize(){
-    grid.innerHTML= "";
+function initialize() {
+    grid.innerHTML = "";
 
     set_array();
     create_elements()
 }
 
-function reset(){
-    set_array();
-    update();
-}
-
-function set_array(){
+function set_array() {
     for (var i = 0; i < nums; i++) {
         var val = Math.trunc(Math.random() * 100);
         arNum[i] = val;
     }
 }
 
-function create_elements(){
+function create_elements() {
     for (var i = 0; i < nums; i++) {
         div = document.createElement("div")
         div.classList.add("nums")
         div.style.height = arNum[i] + "%"
-        div.style.width = 60/nums + "%"
-    
+        div.style.width = 60 / nums + "%"
+
         grid.append(div)
-    }   
+    }
 }
 
 // The delay/sleep function
@@ -51,103 +53,112 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function swap(i,j){
+function swap(i, j) {
     [arNum[i], arNum[j]] = [arNum[j], arNum[i]]
 }
 
-// Simple bubble sort
+// Bubble sort
 async function bubbleSort() {
-    for (var i = 0; i < nums; i++){
-        for (var j = i+1; j < nums; j++) {
-            show_cur(i,j)
+    sortingDone = false;
+    for (var i = 0; i < nums; i++) {
+        for (var j = i + 1; j < nums; j++) {
+            show_cur(i, j)
             if (arNum[i] > arNum[j])
-                swap(i,j)    
-            
+                swap(i, j)
+
             update();
             await sleep(delay);
-            show_cur(i,j);
+            show_cur(i, j);
         }
     }
-    sortingDone=true;
+    sortingDone = true;
 }
 
+// Selection Sort 
 async function selectionSort() {
-    for (var i = 0; i < nums; i++){
+    sortingDone = false;
+    for (var i = 0; i < nums; i++) {
         var curMin = i;
-        for (var j = i+1; j < nums; j++) {
-            show_cur(i,j)
+        for (var j = i + 1; j < nums; j++) {
+            show_cur(i, j)
             if (arNum[curMin] > arNum[j])
                 curMin = j
-            
+
             await sleep(delay);
-            show_cur(i,j);
+            show_cur(i, j);
         }
-        swap(i,curMin);
+        swap(i, curMin);
         update();
     }
-    sortingDone=true;
+    sortingDone = true;
 }
+// Insertion Sort
+async function insertionSort() {
+    sortingDone = false;
+    for (var i = 1; i < nums; i++) {
 
-async function insertionSort(){
-    for(var i=1; i<nums; i++){
-        
-        var j = i-1;
+        var j = i - 1;
         var temp = arNum[i];
 
-        if(temp < arNum[j]){
-            while(j>=0 && temp < arNum[j]){
-                show_cur(j,j+1);
-                swap(j,j+1);
+        if (temp < arNum[j]) {
+            while (j >= 0 && temp < arNum[j]) {
+                show_cur(j, j + 1);
+                swap(j, j + 1);
 
                 update();
                 await sleep(delay);
-                show_cur(j,j+1);                
-                
+                show_cur(j, j + 1);
+
                 j--;
             }
         }
-        else{
-            show_cur(j,j+1);
+        else {
+            show_cur(j, j + 1);
             await sleep(delay);
-            show_cur(j,j+1);   
+            show_cur(j, j + 1);
         }
     }
-    sortingDone=true;
+    sortingDone = true;
 }
 
-function mergeSort(){
-    merge_sort(0,nums-1);
-    async function merge_sort(start, end){
-        if(start === end) return;
-        var middle = Math.floor((start+end)/2);
-        
-        await merge_sort(start,middle);
-        await merge_sort(middle+1,end);
-        
-        await merge_arrays(start,middle,end);
+// Merge Sort
+async function mergeSort() {
+    sortingDone = false;
+    await merge_sort(0, nums - 1);
+    sortingDone = true;
+
+    // Merge Sort Functions
+    async function merge_sort(start, end) {
+        if (start === end) return;
+        var middle = Math.floor((start + end) / 2);
+
+        await merge_sort(start, middle);
+        await merge_sort(middle + 1, end);
+
+        await merge_arrays(start, middle, end);
     }
-    async function merge_arrays(start,middle,end){
-        for( var i=0;i<=middle;i++){
-            var j = middle+1;
-            if(arNum[i]>arNum[j]){
-                show_cur(i,j);
-                
-                swap(i,j);
+    async function merge_arrays(start, middle, end) {
+        for (var i = 0; i <= middle; i++) {
+            var j = middle + 1;
+            if (arNum[i] > arNum[j]) {
+                show_cur(i, j);
+
+                swap(i, j);
 
                 update();
                 await sleep(delay);
-                show_cur(i,j);
+                show_cur(i, j);
 
-                for(var k=j+1;k<=end;k++){
-                    if(arNum[j]>arNum[k]){
-                        show_cur(k,j);
-                        
-                        swap(j,k);
+                for (var k = j + 1; k <= end; k++) {
+                    if (arNum[j] > arNum[k]) {
+                        show_cur(k, j);
+
+                        swap(j, k);
 
                         update();
                         await sleep(delay);
-                        show_cur(k,j);
-                        
+                        show_cur(k, j);
+
                         j++;
                     }
                     else
@@ -158,13 +169,13 @@ function mergeSort(){
     }
 }
 
-async function quickSort(){
+async function quickSort() {
 }
 
 
-function show_cur(i,j){
+function show_cur(i, j) {
     var numbs = document.querySelectorAll(".nums");
-    
+
     numbs[i].classList.toggle("cur_num")
     numbs[j].classList.toggle("cur_num")
 }
@@ -175,35 +186,50 @@ function update() {
         numbs[i].style.height = arNum[i] + "%";
     }
 }
-function hideNseek(){
+function hideNseek() {
     nums = rangeBar.value;
     rangeText.innerText = nums;
 }
-// delay button
-var speedBtns = document.querySelectorAll('.speed');
-var speeds=[200,50,5];
-function press(val){
+
+function setSpeed(val) {
     delay = speeds[val];
-    for(var i=0;i<3;i++)
-        if(val==i)
+    for (var i = 0; i < 4; i++)
+        if (val == i)
             speedBtns[i].classList.add("selected-speed");
         else
             speedBtns[i].classList.remove("selected-speed");
 
 }
-//
-function main(){
-    if(!sortingDone) return; 
 
-    sortingDone = false;
+// (Working Of Prog **********************************
+function generate() {
+    if(!sortingDone) return;
+    if (setupBox.style.visibility === "visible") return;
+    
     initialize();
-    // selectionSort();
-    // bubbleSort();
-    // insertionSort();
-    mergeSort();
-    sortingDone = true;
 }
-function startup(){
+function sort() {
+    if (arNum[0] === -1) return;
+    if (!sortingDone) return;
+    if (setupBox.style.visibility === "visible") return;
 
+    var algo = document.getElementById("algorithm").value[0];
+
+    switch (algo) {
+        case 'B': bubbleSort(); break;
+        case 'S': selectionSort(); break;
+        case 'I': insertionSort(); break;
+        case 'M': mergeSort(); break;
+        case 'Q': quickSort(); break;
+    }
+}
+
+function showbox() {
+    if (!sortingDone) return;
+    setupBox.style.visibility = "visible";
+}
+
+function startup() {
+    setupBox.style.visibility = "hidden";
 }
 // main();
