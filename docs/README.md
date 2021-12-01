@@ -9,5 +9,5 @@ We have,
 * Merge Sort
 * Quick Sort
 
-Play with it:<br>
+That's it play with it:<br>
 https://anonymous372.github.io/Sorting-Visualizer/
