@@ -135,7 +135,7 @@ async function mergeSort() {
   }
 
   async function merge_arrays(start, middle, end) {
-    for (var i = 0; i <= middle; i++) {
+    for (var i = start; i <= middle; i++) {
       var j = middle + 1;
       if (arNum[i] > arNum[j]) {
         show_cur([i, j]);
@@ -148,26 +148,19 @@ async function mergeSort() {
 
         for (var k = j + 1; k <= end; k++) {
           if (arNum[j] > arNum[k]) {
-            show_cur(k, j);
-
             swap(j, k);
-
-            update();
-            await sleep(delay);
-            show_cur(k, j);
-
             j++;
-          } else break;
+          } 
+          else{
+            update();
+            break;
+          }
         }
       }
     }
   }
-}
 
-/**
- *
- * Quick Sort
- */
+// Quick Sort
 async function quickSort() {
   sortingDone = false;
   await quick_sort(0, nums - 1);
@@ -273,4 +266,3 @@ function startup() {
   setupBox.style.visibility = "hidden";
   generate();
 }
-// main();
