@@ -62,12 +62,12 @@ async function bubbleSort() {
   sortingDone = false;
   for (var i = 0; i < nums; i++) {
     for (var j = i + 1; j < nums; j++) {
-      show_cur(i, j);
+      show_cur([i, j]);
       if (arNum[i] > arNum[j]) swap(i, j);
 
       update();
       await sleep(delay);
-      show_cur(i, j);
+      show_cur([i, j]);
     }
   }
   sortingDone = true;
@@ -79,11 +79,11 @@ async function selectionSort() {
   for (var i = 0; i < nums; i++) {
     var curMin = i;
     for (var j = i + 1; j < nums; j++) {
-      show_cur(i, j);
+      show_cur([i, j]);
       if (arNum[curMin] > arNum[j]) curMin = j;
 
       await sleep(delay);
-      show_cur(i, j);
+      show_cur([i, j]);
     }
     swap(i, curMin);
     update();
@@ -138,13 +138,13 @@ async function mergeSort() {
     for (var i = 0; i <= middle; i++) {
       var j = middle + 1;
       if (arNum[i] > arNum[j]) {
-        show_cur(i, j);
+        show_cur([i, j]);
 
         swap(i, j);
 
         update();
         await sleep(delay);
-        show_cur(i, j);
+        show_cur([i, j]);
 
         for (var k = j + 1; k <= end; k++) {
           if (arNum[j] > arNum[k]) {
@@ -177,21 +177,25 @@ async function quickSort() {
   async function partition(start, end) {
     var pivot = arNum[start];
     let left = start + 1;
+    show_cur([start]);
     for (let i = left; i <= end; i++) {
-      show_cur(start, i);
+      show_cur([i]);
       if (arNum[i] < pivot) {
+        show_cur([left]);
         swap(i, left);
-        left += 1;
         update();
         await sleep(delay);
+        show_cur([left]);
+        left += 1;
       }
-      show_cur(start, i);
+      show_cur([i]);
     }
-    show_cur(left - 1, start);
+    show_cur([start]);
+    show_cur([left - 1, start]);
     swap(left - 1, start);
     update();
     await sleep(delay);
-    show_cur(left - 1, start);
+    show_cur([left - 1, start]);
     return left - 1;
   }
   async function quick_sort(start, end) {
@@ -202,11 +206,11 @@ async function quickSort() {
   }
 }
 
-function show_cur(i, j) {
+function show_cur(arr) {
   var numbs = document.querySelectorAll(".nums");
-
-  numbs[i].classList.toggle("cur_num");
-  numbs[j].classList.toggle("cur_num");
+  arr.forEach((i) => {
+    numbs[i].classList.toggle("cur_num");
+  });
 }
 
 function update() {
