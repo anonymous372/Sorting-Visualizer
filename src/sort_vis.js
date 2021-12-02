@@ -149,10 +149,10 @@ async function mergeSort() {
         for (var k = j + 1; k <= end; k++) {
           if (arNum[j] > arNum[k]) {
             swap(j, k);
+            update();
             j++;
           } 
           else{
-            update();
             break;
           }
         }
