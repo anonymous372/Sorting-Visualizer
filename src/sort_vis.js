@@ -194,8 +194,8 @@ async function quickSort() {
   async function quick_sort(start, end) {
     if (start > end) return;
     var piv_index = await partition(start, end);
-    await quick_sort(piv_index + 1, end);
     await quick_sort(start, piv_index - 1);
+    await quick_sort(piv_index + 1, end);
   }
 }
 
