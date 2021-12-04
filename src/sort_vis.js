@@ -152,13 +152,13 @@ async function mergeSort() {
             update();
             j++;
           } 
-          else{
+          else
             break;
-          }
         }
       }
     }
   }
+}
 
 // Quick Sort
 async function quickSort() {
