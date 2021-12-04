@@ -99,19 +99,19 @@ async function insertionSort() {
 
     if (temp < arNum[j]) {
       while (j >= 0 && temp < arNum[j]) {
-        show_cur(j, j + 1);
+        show_cur([j, j + 1]);
         swap(j, j + 1);
 
         update();
         await sleep(delay);
-        show_cur(j, j + 1);
+        show_cur([j, j + 1]);
 
         j--;
       }
     } else {
-      show_cur(j, j + 1);
+      show_cur([j, j + 1]);
       await sleep(delay);
-      show_cur(j, j + 1);
+      show_cur([j, j + 1]);
     }
   }
   sortingDone = true;
